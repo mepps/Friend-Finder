@@ -1,0 +1,67 @@
+*
+{
+	font-family: arial;
+}
+.clear
+{
+	clear: both;
+}
+.bold
+{
+	font-weight: bold;
+}
+#wrapper
+{
+	width: 600px;
+	margin: 0px auto;
+}
+h1
+{
+	text-align: center;
+}
+h3
+{
+	color: LightBlue;
+}
+form input
+{
+	display: block;
+}
+table
+{
+	border-collapse: collapse;
+}
+table th
+{
+	width: 120px;
+	border: 1px solid Gray;
+}
+table td
+{
+	border: 1px solid Gray;
+}
+#register
+{
+	float: left;
+}
+#login
+{
+	float: right;
+}
+#logoff
+{
+}
+img#welcome
+{
+	width: 270px;
+	margin-left: 30px;
+}
+#messages
+{
+	float: right;
+	background-color: Yellow;
+}
+#messages li
+{
+	list-style: none;
+}
