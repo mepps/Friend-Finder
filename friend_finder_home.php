@@ -17,7 +17,7 @@ foreach ($_SESSION['user']->friends  as $key => $friend)
 	$_SESSION['user']->friends[$key] = new Friend($friend['first_name'], $friend['last_name'], $friend['email'], $friend['friend_id']);
 }
 
-$query = "SELECT * from users LEFT JOIN friends on users.id=friends.friend_id ORDER BY users.last_name ASC;";
+$query = "SELECT * from users WHERE 1 ORDER BY users.last_name ASC;";
 $new_friends = $connect->fetch_all($query);
 
 foreach ($new_friends as $key => $new_friend)
@@ -79,14 +79,15 @@ foreach ($new_friends as $new_friend)
 				<tr>
 					<td><?=$new_friend->first_name . " " . $new_friend->last_name?></td>
 					<td><?=$new_friend->email?></td>
+					<td>
 <?php
 	if ($new_friend->id == $_SESSION['user']->id)
 	{
-		echo <td>"This is you."</td>;
+		echo "This is you.";
 	}
 	else if ($new_friend->is_friend($_SESSION['user'])) 
 	{
-		echo <td>"You are friends."</td>;
+		echo "You are friends.";
 	} 
 
 	else
@@ -99,6 +100,7 @@ foreach ($new_friends as $new_friend)
 <?php
 	}
 ?>
+					</td>
 				</tr>
 <?php
 }
