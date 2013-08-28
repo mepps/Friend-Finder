@@ -1,14 +1,10 @@
 <?php 
 require_once ("include/connection.php");
 require_once ("friend_class.php");
-session_start();
 class Process
 {
-	var $connect;
 	function __construct()
-	{
-		$this->connect = new Database;
-	
+	{	
 
 		if ($_POST['action']=='register')
 		{
@@ -26,8 +22,8 @@ class Process
 		else if ($_POST['action']=='add_friend')
 		{
 			$new_friend = unserialize($_POST['friend']);
-			$new_friend->become_friends($_SESSION['user']);
-			header("location: friend_finder_home.php");
+			$this->add_friend_html($new_friend, $_SESSION['user'], "You are friends.");
+
 		}
 
 		if (isset($messages) and count($messages)>0)
@@ -110,7 +106,7 @@ class Process
 		else
 		{
 			$query = "SELECT * FROM users LEFT JOIN friends on users.id=friends.users_id WHERE users.email='".mysql_real_escape_string($_POST['email'])."' AND users.password='".md5($_POST['password'])."';";
-			$users = $this->connect->fetch_all($query);
+			$users = $connect->fetch_all($query);
 				if(count($users)>0)
 				{
 					$_SESSION['logged_in'] = true;
@@ -126,7 +122,18 @@ class Process
 		return $errors;
 	}
 
-
+	private function add_friend_html($added_friend, $user, $message)
+	{
+		$added_friend->become_friends($user);
+		$data['id'] = $added_friend->id;
+		$data['users_table_action'] = $message;
+		$data['friends_table_append'] = 
+		"		<tr>
+					<td>".$added_friend->first_name." ".$added_friend->last_name."</td>
+					<td>".$added_friend->email."</td>
+				</tr>";
+		echo json_encode($data);
+	}
 }
 
 $process = new Process;

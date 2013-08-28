@@ -19,11 +19,7 @@ if (isset($_SESSION['logged_in']) and $_SESSION['logged_in'])
 						$('#messages').html(data.messages);
 						if (data.login == true)
 						{
-							window.location.replace
-
-
-
-							("friend_finder_home.php");
+							window.location.replace("friend_finder_home.php");
 						}
 					}, "json")
 				return false;
@@ -48,6 +44,7 @@ if (isset($_SESSION['logged_in']) and $_SESSION['logged_in'])
 			<input type="password" name="confirm_password" id="confirm_password" />
 			<input type="hidden" name="action" value="register" />
 			<input type="submit" value="Register" />
+
 		</form>
 		<img id="welcome" src="images/welcome-friends.jpg" />
 		<form id="login" class="check_errors" action="process.php" method="post">
